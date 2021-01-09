@@ -1,110 +1,55 @@
+import 'models/Quote.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets/QuoteCard.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: CovirtueIdApp(),
+    home: QuoteList(),
   ));
 }
 
-class CovirtueIdApp extends StatefulWidget {
+class QuoteList extends StatefulWidget {
   @override
-  _CovirtueIdAppState createState() => _CovirtueIdAppState();
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class _CovirtueIdAppState extends State<CovirtueIdApp> {
-
-  int level = 1;
+class _QuoteListState extends State<QuoteList> {
+  List<Quote> quotes = [
+    Quote(text: 'Love For All, Hatred For None.', author: 'Osca Wilde'),
+    Quote(text: 'Change the world by being yourself.', author: 'Osca Wilde'),
+    Quote(text: 'Every moment is a fresh beginning.', author: 'Osca Wilde'),
+    Quote(
+        text: 'Never regret anything that made you smile.',
+        author: 'Osca Wilde'),
+    Quote(text: 'Die with memories, not dreams.', author: 'Osca Wilde'),
+    Quote(text: 'Aspire to inspire before we expire.', author: 'Osca Wilde'),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Covirtue Id App'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[850],
         brightness: Brightness.dark,
-      ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage('https://picsum.photos/200/300'),
-                radius: 40.0,
-              ),
-            ),
-            Divider(
-              height: 60.0,
-              color: Colors.grey[800],
-            ),
-            Text(
-              'NAME',
-              style: TextStyle(color: Colors.grey, letterSpacing: 2.0),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              'Bello Abdulrouf',
-              style: TextStyle(
-                  color: Colors.amberAccent[200],
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Text(
-              'CURRENT LEVEL',
-              style: TextStyle(color: Colors.grey, letterSpacing: 2.0),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              level.toString(),
-              style: TextStyle(
-                  color: Colors.amberAccent[200],
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.email,
-                  color: Colors.grey[400],
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text(
-                  'email@email.com',
-                  style: TextStyle(
-                      color: Colors.grey[100],
-                      fontSize: 18.0,
-                      letterSpacing: 1.0),
-                ),
-              ],
-            )
-          ],
+        backgroundColor: Colors.redAccent,
+        title: Text(
+          'Quote List App',
+          style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            this.level++;
-          });
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.grey[850],
+      body: Column(
+        children: quotes
+            .map((quote) => QuoteCard(
+                  quote,
+                  () {
+                    setState(() {
+                      quotes.remove(quote);
+                    });
+                  },
+                ))
+            .toList(),
       ),
     );
   }
