@@ -6,7 +6,15 @@ void main() {
   ));
 }
 
-class CovirtueIdApp extends StatelessWidget {
+class CovirtueIdApp extends StatefulWidget {
+  @override
+  _CovirtueIdAppState createState() => _CovirtueIdAppState();
+}
+
+class _CovirtueIdAppState extends State<CovirtueIdApp> {
+
+  int level = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,51 +42,69 @@ class CovirtueIdApp extends StatelessWidget {
             ),
             Text(
               'NAME',
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0
-              ),
+              style: TextStyle(color: Colors.grey, letterSpacing: 2.0),
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(
+              height: 10.0,
+            ),
             Text(
               'Bello Abdulrouf',
-              style: TextStyle(
-                color: Colors.amberAccent[200],
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2.0
-              ),
-            ),
-            SizedBox(height: 30.0,),
-            Text(
-              'CURRENT LEVEL',
-              style: TextStyle(
-                  color: Colors.grey,
-                  letterSpacing: 2.0
-              ),
-            ),
-            SizedBox(height: 10.0,),
-            Text(
-              '8',
               style: TextStyle(
                   color: Colors.amberAccent[200],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0
-              ),
+                  letterSpacing: 2.0),
             ),
-            SizedBox(height: 30.0,),
+            SizedBox(
+              height: 30.0,
+            ),
+            Text(
+              'CURRENT LEVEL',
+              style: TextStyle(color: Colors.grey, letterSpacing: 2.0),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              level.toString(),
+              style: TextStyle(
+                  color: Colors.amberAccent[200],
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2.0),
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
             Row(
               children: [
-                Icon(Icons.email, color: Colors.grey[400],),
-                SizedBox(width: 10.0,),
-                Text('email@email.com', style: TextStyle(
-                  color: Colors.grey[100], fontSize: 18.0, letterSpacing: 1.0
-                ),),
+                Icon(
+                  Icons.email,
+                  color: Colors.grey[400],
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  'email@email.com',
+                  style: TextStyle(
+                      color: Colors.grey[100],
+                      fontSize: 18.0,
+                      letterSpacing: 1.0),
+                ),
               ],
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            this.level++;
+          });
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.grey[850],
       ),
     );
   }
