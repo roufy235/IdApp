@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 
 class WorldTime {
@@ -7,6 +8,7 @@ class WorldTime {
   String time = '';
   String flag;
   String url;
+  bool isDayTime = false;
 
 
   WorldTime({this.location, this.url, this.flag});
@@ -26,7 +28,9 @@ class WorldTime {
         //create a datetime obj
         DateTime now = DateTime.parse(datetime);
         now = now.add(Duration(hours: int.parse(offset)));
-        this.time = now.toString();
+
+        this.isDayTime = (now.hour > 6 && now.hour < 0) ? true : false;
+        this.time = DateFormat.jm().format(now);
       } else {
         this.time = 'An error has occurred';
       }
